@@ -1,0 +1,47 @@
+*{
+    font-size: large;
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    margin: auto;
+    margin-top: 1em;
+
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+#imageContainer{
+    display: flex;
+    flex-direction: row;
+}  
+
+#imagePreview{
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        image-rendering: pixelated;
+}
+
+#jsonPreview p{
+    margin-left: 1em;
+    background-color: bisque;
+    border: 1px black solid;
+    font-size: 0.8em;
+    padding: 0.5em;
+}
+
+#originalImage {
+    width: 32px;
+    height: 32px;
+    visibility: hidden;
+}
+
+#colorOutput{
+    font-size: 0.5em !important;
+}

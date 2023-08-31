@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="img-src 'self' data:;default-src 'self'; script-src 'self'"
+    />
+    
+    <link href="./index.css" rel="stylesheet" />
+    <title>Pixel art to json converter</title>
+
+  </head>
+  
+  <body>
+    <div class="mainContainer">
+        
+        <canvas id="originalImage" width="32" height="32"></canvas>
+        
+        <form action="" class="formContainer">
+            <label for="img">Select image (32px x 32px):</label>
+            <input type="file" id="inputImage" name="img" accept="image/*">
+            <hr>
+        </form>
+        <div id="imageContainer">
+            <div id="imagePreview">
+            </div>
+            <div id="jsonPreview">
+            </div>
+        </div>
+    </div>
+    
+    <p id="info"></p>
+  </body>
+    <script src="./renderer.js"></script>
+</html>
+
+
+
+
+
+
+
+    
