@@ -32,7 +32,7 @@ inputImage.addEventListener('change',  event =>
                 reader.readAsDataURL(selectedFile);
             }
             else {
-                imageContainer.innerHTML = "<p>Wrong image format</p>"
+                imageContainer.innerHTML = "<p>Wrong image format. Image must be 32x by 32px !</p>"
             }
         };
 
