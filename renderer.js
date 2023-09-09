@@ -11,11 +11,17 @@ let imgName = ""
 const inputImage = document.getElementById("inputImage")
 const uploadMsg = document.getElementById("uploadMsg")
 const originalImageCanvas = originalImage.getContext("2d");
+const container = document.getElementById("container")
 const imageContainer = document.getElementById("imagePreview")
 const jsonContainer = document.getElementById("jsonPreview")
+const downloadButtonDiv = document.getElementById("downloadButtonDiv")
+
 
 inputImage.addEventListener('change',  event =>
-{   jsonContainer.innerHTML = ""
+{   
+    
+    jsonContainer.innerHTML= ""
+    downloadButtonDiv.innerHTML=""
     const selectedFile = event.target.files[0];
     console.log(selectedFile)
     
@@ -48,7 +54,6 @@ inputImage.addEventListener('change',  event =>
             imageContainer.appendChild(document.createElement('br'))
             imageContainer.appendChild(imageElement);
             
-            
             const convertButton = document.createElement('button')
             convertButton.id = "convertButton"
             convertButton.type = "button"
@@ -57,11 +62,7 @@ inputImage.addEventListener('change',  event =>
             
             imageContainer.appendChild(document.createElement('br'))
             imageContainer.appendChild(convertButton)
-
         };
-        
-        
-        
     } 
     else {
         imageContainer.innerHTML = '<p>Please select a valid image file.</p>';
@@ -71,6 +72,7 @@ inputImage.addEventListener('change',  event =>
 
 function  buttonHandler(e){
     jsonContainer.innerHTML= ""
+    downloadButtonDiv.innerHTML=""
     imgName !=="" ? processImage() : uploadMsg.innerHTML = "You did not select an image"
 }
 
@@ -105,7 +107,7 @@ function processImage(){
         }
         const jsonInfoP = document.createElement('p')
         const jsonInfoColors = document.createElement('p')
-        jsonInfoP.innerHTML = pixelCount ==1024 ? "Image has <strong>"+pixelCount+" pixels</strong>, and consists of <strong>"+colorCount+" colors</strong>." : "Image is the wrong size!"
+        jsonInfoP.innerHTML = `<strong>Great!!!</strong> <br><br>Image information:<br>Image has <strong>${pixelCount} pixels</strong>, and consists of <strong>${colorCount} colors</strong>.<br><br>You can naw save the JSON file.`
         jsonInfoColors.id = "colorOutput"
         //jsonInfoColors.innerHTML = colors
         // append mainUL to body
@@ -124,8 +126,6 @@ function processImage(){
     }
     
     const originalImageData = originalImageCanvas.getImageData(0,0,originalImage.width,originalImage.height)
-    console.log(originalImageData)
-
     let cleanArray = []
 
     for (let i = 0; i < originalImageData.data.length; i += 4) {
@@ -143,13 +143,14 @@ function processImage(){
 
         const jsonBlob = new Blob([jsonArray], {type: "application/json"});
         const url = window.URL.createObjectURL(jsonBlob);
+
         const a = document.createElement('a');
         a.id = 'downloadButton';
         a.href = url;
         // the filename you want
         a.download = 'drawing01.json';
         a.innerText = "Save Json File"
-        jsonContainer.appendChild(a);
+        downloadButtonDiv.appendChild(a);
         
         //a.click();
         //window.URL.revokeObjectURL(url);

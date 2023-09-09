@@ -21,6 +21,14 @@
     align-items: center;
 }
 
+#container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+}
+
 #imageContainer{
     display: flex;
     flex-direction: row;
@@ -54,14 +62,17 @@
 
 #downloadButton{
     padding: 1em;
-    background-color: bisque;
+    background-color: rgb(189, 215, 118);
     border: 1px solid grey;
     border-radius: 10px;
     text-decoration: none;
     color: brown;
+    
+    min-width: 80%;
+    text-align: center;
 }
 #downloadButton:hover{
-    background-color: rgb(251, 186, 106);
+    background-color: rgb(137, 251, 106);
 }
 
 #jsonPreview{
