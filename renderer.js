@@ -1,12 +1,9 @@
-const information = document.getElementById('info')
-information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
-
 const originalImage = document.getElementById("originalImage");
 
 const img = new Image();
-img.onload = () => {
-    originalImageCanvas.drawImage(img, 0, 0);
-};
+let imageIsCorrectSize = false
+
+
 img.crossOrigin = "anonymous";
 img.src = "";
 let imgName = ""
@@ -18,12 +15,26 @@ const imageContainer = document.getElementById("imagePreview")
 const jsonContainer = document.getElementById("jsonPreview")
 
 inputImage.addEventListener('change',  event =>
-{
+{   jsonContainer.innerHTML = ""
     const selectedFile = event.target.files[0];
     console.log(selectedFile)
     
     if (selectedFile && selectedFile.type.includes('image')) {
         const reader = new FileReader();
+        
+
+        img.src = event.target.files[0].path
+        imgName = event.target.files[0].path
+        img.onload = () => {
+            //image sizes
+            if (img.width ===32 && img.height === 32) {
+                originalImageCanvas.drawImage(img, 0, 0)
+                reader.readAsDataURL(selectedFile);
+            }
+            else {
+                imageContainer.innerHTML = "<p>Wrong image format</p>"
+            }
+        };
 
         reader.onload = function(e) {
             const imageElement = document.createElement('img');
@@ -41,33 +52,29 @@ inputImage.addEventListener('change',  event =>
             const convertButton = document.createElement('button')
             convertButton.id = "convertButton"
             convertButton.type = "button"
-            convertButton.innerText = "Convert Image to Json"
+            convertButton.innerText = "Convert Image"
             convertButton.addEventListener("click", e=>{buttonHandler()})
             
             imageContainer.appendChild(document.createElement('br'))
             imageContainer.appendChild(convertButton)
 
         };
-        imgName = event.target.files[0].path
-        img.src = event.target.files[0].path
-        reader.readAsDataURL(selectedFile);
         
-
         
-    } else {
+        
+    } 
+    else {
         imageContainer.innerHTML = '<p>Please select a valid image file.</p>';
     }
 })
 
 
 function  buttonHandler(e){
-    //e.preventDefault()
-    console.log(imgName)
+    jsonContainer.innerHTML= ""
     imgName !=="" ? processImage() : uploadMsg.innerHTML = "You did not select an image"
 }
 
 function sortArray(cleanArray){
-
     const colorsObject ={}
     
     cleanArray.forEach((element, index) => {
@@ -98,14 +105,14 @@ function processImage(){
         }
         const jsonInfoP = document.createElement('p')
         const jsonInfoColors = document.createElement('p')
-        jsonInfoP.innerHTML = "Image has <strong>"+pixelCount+" pixels</strong>, and consists of <strong>"+colorCount+" colors</strong>. <br> These are the colors: <br>"
+        jsonInfoP.innerHTML = pixelCount ==1024 ? "Image has <strong>"+pixelCount+" pixels</strong>, and consists of <strong>"+colorCount+" colors</strong>." : "Image is the wrong size!"
         jsonInfoColors.id = "colorOutput"
-        jsonInfoColors.innerHTML = colors
+        //jsonInfoColors.innerHTML = colors
+        // append mainUL to body
+    
+        jsonContainer.appendChild(jsonInfoP);
 
-
-    // append mainUL to body
-    jsonContainer.appendChild(jsonInfoP);
-    jsonContainer.appendChild(jsonInfoColors);
+        //jsonContainer.appendChild(jsonInfoColors);
     }
     
 
@@ -117,6 +124,7 @@ function processImage(){
     }
     
     const originalImageData = originalImageCanvas.getImageData(0,0,originalImage.width,originalImage.height)
+    console.log(originalImageData)
 
     let cleanArray = []
 
@@ -131,17 +139,17 @@ function processImage(){
     }
         const jsonArray = sortArray(cleanArray)
     
-        console.log(jsonArray)
-
+        //console.log(jsonArray)
 
         const jsonBlob = new Blob([jsonArray], {type: "application/json"});
         const url = window.URL.createObjectURL(jsonBlob);
         const a = document.createElement('a');
-        a.style.display = 'none';
+        a.id = 'downloadButton';
         a.href = url;
         // the filename you want
         a.download = 'drawing01.json';
-        document.body.appendChild(a);
+        a.innerText = "Save Json File"
+        jsonContainer.appendChild(a);
         
         //a.click();
         //window.URL.revokeObjectURL(url);
@@ -149,5 +157,6 @@ function processImage(){
     
 }
 
-
+const information = document.getElementById('info')
+information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
 

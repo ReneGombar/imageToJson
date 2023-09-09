@@ -18,8 +18,8 @@
         <canvas id="originalImage" width="32" height="32"></canvas>
         
         <form action="" class="formContainer">
-            <label for="img">Select image (32px x 32px):</label>
-            <input type="file" id="inputImage" name="img" accept="image/*">
+            <label id="label" for="img">Select image. <i>Image must be 32px wide and 32px high</i>:</label>
+            <input type="file" id="inputImage" name="img" accept="image/*" text="Load Image">
             <hr>
         </form>
         <div id="imageContainer">
@@ -28,9 +28,9 @@
             <div id="jsonPreview">
             </div>
         </div>
+        <p id="info"></p>
     </div>
     
-    <p id="info"></p>
   </body>
     <script src="./renderer.js"></script>
 </html>

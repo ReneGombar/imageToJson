@@ -6,14 +6,19 @@
     display: flex;
     flex-direction: column;
     width: 98%;
-    margin: auto;
+    
     margin-top: 1em;
+    align-items: center;
+}
 
+#label{
+    margin: 10px;
 }
 
 .formContainer{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 #imageContainer{
@@ -34,6 +39,7 @@
     border: 1px black solid;
     font-size: 0.8em;
     padding: 0.5em;
+
 }
 
 #originalImage {
@@ -44,4 +50,27 @@
 
 #colorOutput{
     font-size: 0.5em !important;
+}
+
+#downloadButton{
+    padding: 1em;
+    background-color: bisque;
+    border: 1px solid grey;
+    border-radius: 10px;
+    text-decoration: none;
+    color: brown;
+}
+#downloadButton:hover{
+    background-color: rgb(251, 186, 106);
+}
+
+#jsonPreview{
+    display: flex;
+    flex-direction: column;
+}
+
+#info{
+    position: absolute;
+    top: 90vh;
+    font-size: small;
 }
