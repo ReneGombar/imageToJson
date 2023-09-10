@@ -1,7 +1,7 @@
 {
   "name": "electronapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple Image to JSON converter",
   "main": "index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -9,7 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
-  "author": "",
+  "author": "rgombar@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^6.4.2",
