@@ -107,7 +107,7 @@ function processImage(){
         }
         const jsonInfoP = document.createElement('p')
         const jsonInfoColors = document.createElement('p')
-        jsonInfoP.innerHTML = `<strong>Great!!!</strong> <br><br>Image information:<br>Image has <strong>${pixelCount} pixels</strong>, and consists of <strong>${colorCount} colors</strong>.<br><br>You can naw save the JSON file.`
+        jsonInfoP.innerHTML = `<strong>Image successfully converted!!!</strong> <br><br>Image information:<br>Image has <strong>${pixelCount} pixels</strong>, and consists of <strong>${colorCount} colors</strong>.<br><br>You can naw save the JSON file.`
         jsonInfoColors.id = "colorOutput"
         //jsonInfoColors.innerHTML = colors
         // append mainUL to body

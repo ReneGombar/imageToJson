@@ -11,6 +11,7 @@ const createWindow = () => {
       resizable: false
   })
 
+  win.removeMenu()
   win.loadFile('index.html')
 }
 
